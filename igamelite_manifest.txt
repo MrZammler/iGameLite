@@ -1,0 +1,120 @@
+iGameLite Project Manifest
+--------------------------
+
+-----
+Intro
+-----
+
+iGameLite is a simple and lightweight app which launches whdload games.
+
+The application presents a list of games, from which the user can run the game
+he chooses. iGameLite will be controllable by joystick, and it should be possible
+to use it without a keyboard, although if it exists, it should provide more means
+of control over the app.
+
+Target hardware is a basic 68000 with 1MB chip ram. It should have mimimal delay
+to list and execute a game, and consume as little ram as possible.
+
+-----------
+Basic Usage
+-----------
+
+On start, iGameLite will read a certain iff file and display it on screen (now called
+back.iff). This will be the background image. On this background image there will be
+a certain predefined space to list the games.
+
+Games will be loaded from a file on disk (now called gameslist). The gameslist will
+be created through a second command line utility.
+
+Once in idle, the joystick will perform the following operations:
+
+Up -> Move upwards through the list
+Down -> Move downwards through the list
+Left -> Refresh list starting with the previous letter in the alphabet
+Right -> Refresh list starting with the next letter in the alphabet
+Fire -> Execute game
+Keyboard -> On the fly filter (optional)
+
+iGameLite should provide visual indication of the above operations, i.e. a flashing
+letter indicating the next letter in left & right operations, and something to indicate
+that is starting a game.
+
+Ideally, iGameLite should close the opened screen when it launches a game to increase
+free chip ram.
+
+There could be a game image preview (as in iGame). Wont do it if it makes the whole
+thing crawl...
+
+----------------------------
+The Create-GamesList Utility
+----------------------------
+
+This should be a separate command line utility, to create/ammend a gameslist file. 
+If a gameslist file already exists, then it should ammend it with removed or newely added ones.
+
+It should be an interactive application, no command line parameters. (Asks questions as it goes).
+
+----------------
+Background Music
+----------------
+
+iGameLite will play a pre-defined (or random) mod while running. The user should
+be able to choose which one, maybe set a playlist, or random songs from the config.
+
+-----
+Skins
+-----
+
+A skin should be basically a PAL/NTSC iff image with room to display the list of files
+or other info. Each skin should be accompanied with a text file which would arrange
+the items on the screen (mainly the area where the list should be, or the game preview
+pic). There might also be a selection of fonts, or a custom font to go with a skin.
+
+---------------
+Technical Notes
+---------------
+
+iGameLite should be installed in it's own drawer. There should be an assign to that
+drawer, and iGameLite should be startable from anywhere.
+
+Possible drawer structure:
+
++-iGameLite/
+  |
+  +-Mods/
+  | |
+  | +-first.mod
+  | +-second.mod
+  | 
+  +-Skins/
+  | |
+  | +-skin1/
+  |   |
+  |   +-skin1.iff
+  |   +-skin1.config
+  |   +-skin1.font
+  |  
+  +-config
+  +-gameslist
+  +-iGameLite
+  +-iGameLiteListEditor
+
+Fast gameslist, binary file most likely. It should load whatever data is required
+to draw each screen, keep a pointer at all times to make it faster to locate data.
+
+The gameslist should contain the games titles already sorted. It's crucial to make
+reading the list as fast as possible.
+
+On the other hand, a text only gameslist would eliminate the need of an 
+iGameLiteListEditor.
+
+The back.iff file should be user selectable and editable. Maybe there could be a
+configuration option of where to place the list ontop of the back.iff file. 
+
+Font should also be configurable.
+
+There should be a random mods operation, where user can have various mods installed.
+iGameLite should play one at random at each start.
+
+Possible mimimig adapted iGameLite? Maybe if there is a way to "see" the SD card
+through the Emulated amiga, wishful thinking...
